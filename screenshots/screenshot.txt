@@ -1,1 +1,2 @@
 Created a PDF with screenshots for each flow in order
+Sensitive client name and information are hidden in the PDF
