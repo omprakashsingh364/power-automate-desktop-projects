@@ -1,54 +1,44 @@
-# power-automate-desktop-projects
-Rule-based process automation using Power Automate Desktop, Excel VBA, and JavaScript
-
-# Rule-Based Process Automation using Power Automate Desktop
+# Power Automate Desktop (PAD)
 
 ## Overview
-This repository documents a personal automation project built using
-Power Automate Desktop (PAD), Excel, and JavaScript.
 
-The automation focuses on reducing manual effort by using
-rule-based decision logic that learns from user inputs.
+This repository showcases **personal Power Automate Desktop (PAD) automation projects** built to solve real operational problems using structured logic, modular design, and clear documentation.
 
-> ⚠️ Note: PAD flow files are not uploaded due to tool limitations
-and data confidentiality. This repository showcases architecture,
-logic, and implementation approach.
+Due to PAD limitations and data confidentiality, **actual flow files are not uploaded**. Instead, projects are presented through **architecture diagrams, screenshots, and concise explanations** that highlight design thinking and outcomes.
 
 ---
 
-## Problem Statement
-- Manual claim processing was time-consuming
-- Hardcoded logic required frequent updates
-- Manual inputs caused delays and inconsistencies
+## Repository Structure
+
+Each folder represents an **independent PAD project**.
+
+## Projects
+
+### Rule-Based Process Automation (PAD)
+
+* Modular automation with **main flow + 13 subflows**
+* Rule-based learning using Excel and Boolean logic
+* JavaScript integration for performance optimization
+* ~80% automation, ~50% reduction in processing time
 
 ---
 
-## Solution Design
-- Built end-to-end PAD automation
-- Implemented rule-based learning logic
-- Stored rules in structured Excel files
-- Used Boolean conditions for fast rule matching
-- Integrated JavaScript for performance improvement
-- Used JSON-based objects to reduce variable complexity
+## Tools
+
+* Power Automate Desktop (PAD)
+* Excel (Advanced, VBA)
+* JavaScript (within PAD)
+* JSON-based data handling
 
 ---
 
-## Key Outcomes
-- ~80% automation achieved
-- Processing time reduced from ~2 min to ~1 min per case
-- Maintained 98–99% accuracy
-- Reduced dependency on manual decision-making
+## Note
+
+All content is **sanitized and anonymized**. No client data or proprietary systems are included.
 
 ---
 
-## Technologies Used
-- Power Automate Desktop (PAD)
-- Excel (Advanced, VBA)
-- JavaScript (logic integration)
-- JSON-based data handling
-
----
-
-## Disclaimer
-All data, screenshots, and examples are anonymized and created
-for demonstration purposes only.
+**Om Prakash**
+Automation & Process Improvement Professional
+📧 [omprakashsingh364@gmail.com](mailto:omprakashsingh364@gmail.com)
+🔗 LinkedIn: [https://linkedin.com/in/om-prakash-singh-618425187](https://linkedin.com/in/om-prakash-singh-618425187)
