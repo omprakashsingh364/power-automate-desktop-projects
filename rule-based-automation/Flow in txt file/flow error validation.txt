@@ -1,0 +1,13 @@
+
+FUNCTION '12_FlowErrorValidation' GLOBAL
+    ERROR => LastError
+    File.WriteText File: $'''%Path_Config_Files%Error Log.txt''' TextToWrite: $'''*******************************************************************************
+
+%CurrentDateTime%
+%LastError%
+
+*******************************************************************************''' AppendNewLine: True IfFileExists: File.IfFileExists.Append Encoding: File.FileEncoding.DefaultEncoding
+    Display.ShowMessageDialog.ShowMessage Title: $'''👤Flow Error''' Message: $'''👉Flow Stopped With Error ⚠️ :
+%CurrentDateTime%
+%LastError%''' Icon: Display.Icon.Information Buttons: Display.Buttons.OK DefaultButton: Display.DefaultButton.Button1 IsTopMost: True ButtonPressed=> ButtonPressed2
+END FUNCTION

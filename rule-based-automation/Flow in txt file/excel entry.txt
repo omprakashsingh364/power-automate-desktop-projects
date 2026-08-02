@@ -1,0 +1,52 @@
+
+FUNCTION '09_Excel_Entry' GLOBAL
+    SET Result_DataRow[0]['Primary Ins'] TO $'''Name: %Object['Claim']['Primary']['LOB']['Name']%
+Ins  ID: %Object['Claim']['Primary']['LOB']['Ins Id']%
+Sub No: %Object['Claim']['Primary']['LOB']['Subscriber No']%
+Ins Type: %Object['Claim']['Primary']['LOB']['Ins Type']%
+InMatrix: %Object['Claim']['Primary']['LOB']['InMatrix']%
+IsChangeNeeded: %Object['Claim']['Primary']['LOB']['IsChangeNeeded']%
+NewPayerID: %Object['Claim']['Primary']['LOB']['NewPayerID']%'''
+    SET Result_DataRow[0]['PVR Check'] TO $'''IsComplete: %Object['PVR']['IsComplete']%
+Button: %Object['PVR']['Button']%'''
+    SET Result_DataRow[0]['Primary Eligibility'] TO $'''IsFound: %Object['Claim']['Primary']['Eligibility']['Final Info']['IsFound']%
+Final Begin Date: %Object['Claim']['Primary']['Eligibility']['Final Info']['Final Begin Date']%
+Final End Date: %Object['Claim']['Primary']['Eligibility']['Final Info']['Final End Date']%
+Status: %Object['Claim']['Primary']['Eligibility']['Final Info']['Status']%
+Checked On: %Object['Claim']['Primary']['Eligibility']['Final Info']['Checked On']%
+IsAttributed: %Object['Claim']['Primary']['Eligibility']['Final Info']['IsAttributed']%
+Insurance Type: %Object['Claim']['Primary']['Eligibility']['Ins Type Info']['Insurance Type']%
+IsMedicare: %Object['Claim']['Primary']['Eligibility']['Ins Type Info']['IsMedicare']%
+IsChangeNeeded: %Object['Claim']['Primary']['Eligibility']['Ins Type Info']['IsChangeNeeded']%
+NewInsName: %Object['Claim']['Primary']['Eligibility']['Ins Type Info']['NewInsName']%'''
+    IF (Object['Claim']['Secondary']['LOB']['IsPresent'] = True AND Object['Ins Sequence']['IsSecondaryRemoveNeeded'] = False) = True THEN
+        SET Result_DataRow[0]['Secondary Ins'] TO $'''Name: %Object['Claim']['Secondary']['LOB']['Name']%
+Ins  ID: %Object['Claim']['Secondary']['LOB']['Ins Id']%
+Sub No: %Object['Claim']['Secondary']['LOB']['Subscriber No']%
+Ins Type: %Object['Claim']['Secondary']['LOB']['Ins Type']%
+InMatrix: %Object['Claim']['Secondary']['LOB']['InMatrix']%
+IsChangeNeeded: %Object['Claim']['Secondary']['LOB']['IsChangeNeeded']%
+NewPayerID: %Object['Claim']['Secondary']['LOB']['NewPayerID']%'''
+        SET Result_DataRow[0]['Secondary Eligibility'] TO $'''IsFound: %Object['Claim']['Secondary']['Eligibility']['Final Info']['IsFound']%
+Final Begin Date: %Object['Claim']['Secondary']['Eligibility']['Final Info']['Final Begin Date']%
+Final End Date: %Object['Claim']['Secondary']['Eligibility']['Final Info']['Final End Date']%
+Status: %Object['Claim']['Secondary']['Eligibility']['Final Info']['Status']%
+Checked On: %Object['Claim']['Secondary']['Eligibility']['Final Info']['Checked On']%
+IsAttributed: %Object['Claim']['Secondary']['Eligibility']['Final Info']['IsAttributed']%
+Insurance Type: %Object['Claim']['Secondary']['Eligibility']['Ins Type Info']['Insurance Type']%
+IsMedicare: %Object['Claim']['Secondary']['Eligibility']['Ins Type Info']['IsMedicare']%
+IsChangeNeeded: %Object['Claim']['Secondary']['Eligibility']['Ins Type Info']['IsChangeNeeded']%
+NewInsName: %Object['Claim']['Secondary']['Eligibility']['Ins Type Info']['NewInsName']%'''
+    END
+    SET Result_DataRow[0]['Facility Market'] TO $'''%Object['Claim']['Main Screen']['Facility']%
+%CurrentItem[9]%'''
+    IF CPT_DT_Object['DI_Info']['IsDI_CPTPresent'] = True THEN
+        Variables.ClearDataTable DataTable: DI_infoDT
+        Variables.CreateNewDatatable InputTable: { ^['Claim #', 'Status', 'Account No', 'Tech DOS', 'Prof DOS', 'Provider Name', 'State', 'Primary_EB', 'Facility_Name', 'Bill_Fee', 'CPT_Col', 'Title', 'LOB_Change'], [Object['Claim']['Main Screen']['Claim No'], $'''''', Object['Claim']['Main Screen']['Account No'], Object['Claim']['Main Screen']['Service Date'], $'''''', CPT_DT_Object['DI_Info']['CombinedTitle'], Object['Account']['Info']['state'], Object['Claim']['Primary']['Eligibility']['Final Info']['Final Begin Date'], $'''''', $'''''', CPT_DT_Object['DI_Info']['CombinedCpt'], CPT_DT_Object['DI_Info']['CombinedTitle'], Object['Claim']['Primary']['LOB']['IsChangeNeeded']] } DataTable=> DI_infoDT
+        Excel.SetActiveWorksheet.ActivateWorksheetByName Instance: Resultexcel Name: $'''DI_Claim#'''
+        Excel.GetFirstFreeColumnRow Instance: Resultexcel FirstFreeColumn=> FirstFreeColumn_in_DI_RE FirstFreeRow=> FirstFreeRow_in_DI_RE
+        Excel.WriteToExcel.WriteCell Instance: Resultexcel Value: DI_infoDT Column: $'''A''' Row: FirstFreeRow_in_DI_RE
+        Excel.SetActiveWorksheet.ActivateWorksheetByName Instance: Resultexcel Name: $'''Conviva'''
+    END
+    Excel.WriteToExcel.WriteCell Instance: Resultexcel Value: Result_DataRow Column: $'''A''' Row: FoundRowIndexRE
+END FUNCTION

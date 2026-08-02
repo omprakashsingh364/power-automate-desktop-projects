@@ -1,0 +1,8 @@
+
+FUNCTION '11_ScreenShot&Logs' GLOBAL
+    **REGION Screen shot  for log
+    DateTime.GetCurrentDateTime.Local DateTimeFormat: DateTime.DateTimeFormat.DateAndTime CurrentDateTime=> CurrentDateTime
+    Text.ConvertDateTimeToText.FromCustomDateTime DateTime: CurrentDateTime CustomFormat: $'''MM.dd.yyyy_hh.mm.ss.tt''' Result=> CurrentDateTime
+    WebAutomation.TakeScreenshot.TakeScreenshotSaveToFile BrowserInstance: edgeBrowser File: $'''%Path_DataTable[6][1]%%CurrentItem[0]%_%CurrentDateTime%.png''' FileFormat: WebAutomation.FileFormat.Png
+    **ENDREGION
+END FUNCTION
